@@ -11,3 +11,5 @@ steps:
       '--rm',
       'gcr.io/$PROJECT_ID/trace-demo'
     ]
+options:
+  logging: CLOUD_LOGGING_ONLY
