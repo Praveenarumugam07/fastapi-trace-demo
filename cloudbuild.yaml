@@ -6,4 +6,8 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/trace-demo']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['run', 'gcr.io/$PROJECT_ID/trace-demo']
+    args: [
+      'run',
+      '--rm',
+      'gcr.io/$PROJECT_ID/trace-demo'
+    ]
