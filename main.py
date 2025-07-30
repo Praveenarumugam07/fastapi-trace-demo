@@ -1,26 +1,15 @@
+import os
+import uvicorn
 from fastapi import FastAPI
-from otel_config import init_tracer
-import time
+from otel_config import configure_tracer
 
 app = FastAPI()
-init_tracer(service_name="sample-api")
+configure_tracer()
 
 @app.get("/")
 def read_root():
-    time.sleep(0.2)
-    return {"message": "Hello World"}
+    return {"message": "Hello from FastAPI with Jaeger Tracing"}
 
-@app.get("/build-stage")
-def simulate_build():
-    time.sleep(0.5)
-    return {"stage": "Build Completed"}
-
-@app.get("/test-stage")
-def simulate_test():
-    time.sleep(0.3)
-    return {"stage": "Tests Passed"}
-
-@app.get("/deploy-stage")
-def simulate_deploy():
-    time.sleep(0.6)
-    return {"stage": "Deployed Successfully"}
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))  # Read the PORT from environment
+    uvicorn.run(app, host="0.0.0.0", port=port)
