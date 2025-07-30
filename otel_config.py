@@ -11,6 +11,6 @@ def init_tracer(service_name: str):
         )
     )
 
-    otlp_exporter = OTLPSpanExporter(endpoint="http://34.47.150.135:4318/v1/traces")
+    otlp_exporter = OTLPSpanExporter(endpoint="http://34.9.8.45:4318/v1/traces")
     span_processor = BatchSpanProcessor(otlp_exporter)
     trace.get_tracer_provider().add_span_processor(span_processor)
