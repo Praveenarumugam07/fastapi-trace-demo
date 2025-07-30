@@ -9,17 +9,19 @@ steps:
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: Deploy
-    args: [
-      'run', 'deploy', 'fastapi-trace-demo',
-      '--image', 'gcr.io/$PROJECT_ID/fastapi-trace-demo:$SHORT_SHA',
-      '--region', 'us-central1',
-      '--platform', 'managed',
-      '--allow-unauthenticated',
-      '--set-env-vars', 'OTEL_EXPORTER_OTLP_ENDPOINT=http://34.9.8.45:4318'
-    ]
+    args:
+      - run
+      - deploy
+      - fastapi-trace-demo
+      - --image
+      - gcr.io/$PROJECT_ID/fastapi-trace-demo:$SHORT_SHA
+      - --region
+      - us-central1
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --set-env-vars
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://34.9.8.45:4318
 
 images:
   - 'gcr.io/$PROJECT_ID/fastapi-trace-demo:$SHORT_SHA'
-
-options:
-  logging: CLOUD_LOGGING_ONLY
