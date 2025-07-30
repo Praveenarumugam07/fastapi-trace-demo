@@ -6,12 +6,11 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 import os
 
 def init_tracer(service_name: str):
-    jaeger_url = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:4318")
+    endpoint = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:4318")
     trace.set_tracer_provider(
-        TracerProvider(
-            resource=Resource.create({SERVICE_NAME: service_name})
-        )
+        TracerProvider(resource=Resource.create({SERVICE_NAME: service_name}))
     )
 
-    otlp_exporter = OTLPSpanExporter(endpoint=jaeger_url + "/v1/traces")
-    trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(otlp_exporter))
+    otlp_exporter = OTLPSpanExporter(endpoint=endpoint + "/v1/traces")
+    span_processor = BatchSpanProcessor(otlp_exporter)
+    trace.get_tracer_provider().add_span_processor(span_processor)
