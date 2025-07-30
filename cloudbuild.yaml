@@ -21,4 +21,4 @@ images:
   - 'gcr.io/$PROJECT_ID/fastapi-trace-demo:$SHORT_SHA'
 
 options:
-logging : CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY
